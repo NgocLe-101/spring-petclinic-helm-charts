@@ -1,7 +1,0 @@
-deployment:
-  serviceName: "spring-petclinic-customers-service"
-image:
-  tag: "latest"
-service:
-  servicePort: 8082
-  name: "customers-service"

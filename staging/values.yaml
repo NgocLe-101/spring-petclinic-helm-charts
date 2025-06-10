@@ -1,0 +1,86 @@
+namespace: staging
+services:
+  config-server:
+    deployment:
+      serviceName: spring-petclinic-config-server
+      replicas: 1
+    image:
+      repository: ngocle101
+      tag: latest
+      imagePullPolicy: IfNotPresent
+    service:
+      name: config-server
+      servicePort: 8888
+      type: ClusterIP
+  admin-server:
+    deployment:
+      serviceName: spring-petclinic-admin-server
+      replicas: 1
+    image:
+      repository: ngocle101
+      tag: latest
+      imagePullPolicy: IfNotPresent
+    service:
+      name: admin-server
+      servicePort: 8080
+      type: ClusterIP
+  api-gateway:
+    deployment:
+      serviceName: spring-petclinic-api-gateway
+      replicas: 1
+    image:
+      repository: ngocle101
+      tag: latest
+      imagePullPolicy: IfNotPresent
+    service:
+      name: api-gateway
+      servicePort: 8080
+      type: ClusterIP
+  discovery-server:
+    deployment:
+      serviceName: spring-petclinic-discovery-server
+      replicas: 1
+    image:
+      repository: ngocle101
+      tag: latest
+      imagePullPolicy: IfNotPresent
+    service:
+      name: discovery-server
+      servicePort: 8761
+      type: ClusterIP
+  customers-service:
+    deployment:
+      serviceName: spring-petclinic-customers-service
+      replicas: 1
+    image:
+      repository: ngocle101
+      tag: latest
+      imagePullPolicy: IfNotPresent
+    service:
+      name: customers-service
+      servicePort: 8080
+      type: ClusterIP
+  vets-service:
+    deployment:
+      serviceName: spring-petclinic-vets-service
+      replicas: 1
+    image:
+      repository: ngocle101
+      tag: latest
+      imagePullPolicy: IfNotPresent
+    service:
+      name: vets-service
+      servicePort: 8080
+      type: ClusterIP
+  visits-service:
+    deployment:
+      serviceName: spring-petclinic-visits-service
+      replicas: 1
+    image:
+      repository: ngocle101
+      tag: latest
+      imagePullPolicy: IfNotPresent
+    service:
+      name: visits-service
+      servicePort: 8080
+      type: ClusterIP

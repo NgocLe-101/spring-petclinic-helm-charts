@@ -12,13 +12,7 @@ spec:
     path: .
     helm:
       valueFiles:
-        - staging/values/config-server-values.yaml
-        - staging/values/admin-server-values.yaml
-        - staging/values/api-gateway-values.yaml
-        - staging/values/discovery-server-values.yaml
-        - staging/values/customers-service-values.yaml
-        - staging/values/vets-service-values.yaml
-        - staging/values/visits-service-values.yaml
+        - staging/values.yaml
   
   destination:
     server: https://kubernetes.default.svc
