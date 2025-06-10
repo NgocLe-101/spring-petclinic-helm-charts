@@ -54,7 +54,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101
-      tag: latest
+      tag: 4d4e7e4
       imagePullPolicy: IfNotPresent
     service:
       name: customers-service
