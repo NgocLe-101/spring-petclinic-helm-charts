@@ -1,7 +1,0 @@
-deployment:
-  serviceName: "spring-petclinic-visits-service"
-image:
-  tag: "latest"
-service:
-  servicePort: 8081
-  name: "visits-service"

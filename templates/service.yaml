@@ -1,19 +1,20 @@
+{{- range $name, $svc := .Values.services }}
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.service.name }}
-  namespace: {{ .Values.namespace }}
+  name: {{ $svc.service.name }}
+  namespace: {{ $.Values.namespace }}
 spec:
   selector:
-    app: {{ .Values.deployment.serviceName }}
-  type: {{ .Values.service.type | default "ClusterIP" }}
+    app: {{ $svc.deployment.serviceName }}
+  type: {{ $svc.service.type | default "ClusterIP" }}
   ports:
   - name: http
     protocol: TCP
-    port: {{ .Values.service.servicePort }}
-    targetPort: {{ .Values.service.servicePort }}
-    {{- if eq .Values.service.type "NodePort" }}
-    nodePort: {{ .Values.service.nodePort | default 30000 }}
+    port: {{ $svc.service.servicePort }}
+    targetPort: {{ $svc.service.servicePort }}
+    {{- if eq $svc.service.type "NodePort" }}
+    nodePort: {{ $svc.service.nodePort | default 30000 }}
     {{- end }}
----
-
+{{- end }}

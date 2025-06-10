@@ -1,7 +1,0 @@
-deployment:
-  serviceName: "spring-petclinic-admin-server"
-image:
-  tag: "latest"
-service:
-  servicePort: 8083
-  name: "admin-server"

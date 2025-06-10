@@ -1,7 +1,0 @@
-deployment:
-  serviceName: "spring-petclinic-discovery-server"
-image:
-  tag: "latest"
-service:
-  servicePort: 8761
-  name: "discovery-server"

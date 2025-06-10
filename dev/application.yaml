@@ -12,13 +12,7 @@ spec:
     path: .
     helm:
       valueFiles:
-        - dev/values/admin-server-values.yaml
-        - dev/values/api-gateway-values.yaml
-        - dev/values/config-server-values.yaml
-        - dev/values/discovery-server-values.yaml
-        - dev/values/customers-service-values.yaml
-        - dev/values/vets-service-values.yaml
-        - dev/values/visits-service-values.yaml
+        - dev/values.yaml
   
   destination:
     server: https://kubernetes.default.svc

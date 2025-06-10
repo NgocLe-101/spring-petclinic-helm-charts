@@ -1,7 +1,0 @@
-deployment:
-  serviceName: spring-petclinic-customers-service
-image:
-  tag: b01ae62
-service:
-  servicePort: 8082
-  name: customers-service

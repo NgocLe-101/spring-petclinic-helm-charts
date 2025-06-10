@@ -1,7 +1,0 @@
-deployment:
-  serviceName: "spring-petclinic-vets-service"
-image:
-  tag: "latest"
-service:
-  servicePort: 8080
-  name: "vets-service"

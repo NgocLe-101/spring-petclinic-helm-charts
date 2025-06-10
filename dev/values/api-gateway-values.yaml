@@ -1,7 +1,0 @@
-deployment:
-  serviceName: "spring-petclinic-api-gateway"
-image:
-  tag: "latest"
-service:
-  servicePort: 8085
-  name: "api-gateway"
