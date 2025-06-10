@@ -22,6 +22,5 @@ spec:
         image: "{{ $svc.image.repository }}/{{ $svc.deployment.serviceName }}:{{ $svc.image.tag }}"
         imagePullPolicy: {{ $svc.image.imagePullPolicy }}
         ports:
-          - name: {{ $svc.service.name }}
             containerPort: {{ $svc.service.servicePort }}
 {{- end }}
