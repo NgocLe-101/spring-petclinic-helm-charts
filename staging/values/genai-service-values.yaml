@@ -1,0 +1,7 @@
+deployment:
+  serviceName: "spring-petclinic-genai-service"
+image:
+  tag: "latest"
+service:
+  servicePort: 8084
+  name: "genai-service"

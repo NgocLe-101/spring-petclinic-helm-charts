@@ -12,5 +12,8 @@ spec:
     protocol: TCP
     port: {{ .Values.service.servicePort }}
     targetPort: {{ .Values.service.servicePort }}
+    {{- if eq .Values.service.type "NodePort" }}
+    nodePort: {{ .Values.service.nodePort | default 30000 }}
+    {{- end }}
 ---
 

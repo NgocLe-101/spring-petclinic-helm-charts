@@ -1,0 +1,7 @@
+deployment:
+  serviceName: "spring-petclinic-config-server"
+image:
+  tag: "latest"
+service:
+  servicePort: 8888
+  name: "config-server"
