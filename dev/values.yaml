@@ -2,10 +2,10 @@ namespace: dev
 services:
   config-server:
     deployment:
-      serviceName: spring-petclinic-config-server
+      serviceName: config-server
       replicas: 1
     image:
-      repository: ngocle101
+      repository: ngocle101/spring-petclinic-config-server
       tag: latest
     service:
       name: config-server
@@ -14,10 +14,10 @@ services:
 
   admin-server:
     deployment:
-      serviceName: spring-petclinic-admin-server
+      serviceName: admin-server
       replicas: 1
     image:
-      repository: ngocle101
+      repository: ngocle101/spring-petclinic-admin-server
       tag: latest
     service:
       name: admin-server
@@ -26,10 +26,10 @@ services:
 
   api-gateway:
     deployment:
-      serviceName: spring-petclinic-api-gateway
+      serviceName: api-gateway
       replicas: 1
     image:
-      repository: ngocle101
+      repository: ngocle101/spring-petclinic-api-gateway
       tag: latest
     service:
       name: api-gateway
@@ -38,10 +38,10 @@ services:
 
   discovery-server:
     deployment:
-      serviceName: spring-petclinic-discovery-server
+      serviceName: discovery-server
       replicas: 1
     image:
-      repository: ngocle101
+      repository: ngocle101/spring-petclinic-discovery-server
       tag: latest
     service:
       name: discovery-server
@@ -50,10 +50,10 @@ services:
 
   customers-service:
     deployment:
-      serviceName: spring-petclinic-customers-service
+      serviceName: customers-service
       replicas: 1
     image:
-      repository: ngocle101
+      repository: ngocle101/spring-petclinic-customers-service
       tag: 4d4e7e4
     service:
       name: customers-service
@@ -62,10 +62,10 @@ services:
 
   vets-service:
     deployment:
-      serviceName: spring-petclinic-vets-service
+      serviceName: vets-service
       replicas: 1
     image:
-      repository: ngocle101
+      repository: ngocle101/spring-petclinic-vets-service
       tag: latest
     service:
       name: vets-service
@@ -74,12 +74,24 @@ services:
 
   visits-service:
     deployment:
-      serviceName: spring-petclinic-visits-service
+      serviceName: visits-service
       replicas: 1
     image:
-      repository: ngocle101
+      repository: ngocle101/spring-petclinic-visits-service
       tag: latest
     service:
       name: visits-service
       servicePort: 8082
+      type: ClusterIP
+
+  tracing-server:
+    deployment:
+      serviceName: tracing-server
+      replicas: 1
+    image:
+      repository: openzipkin/zipkin
+      tag: latest
+    service:
+      name: tracing-server
+      servicePort: 9411
       type: ClusterIP
