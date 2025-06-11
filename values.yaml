@@ -32,8 +32,9 @@ genaiService:
 
 prometheus:
   image:
-    repository: "prom/prometheus"
+    repository: "ngocle101/prometheus"
     tag: "latest"
   service:
     type: "NodePort"
     port: 9090
+    nodePort: 30092
