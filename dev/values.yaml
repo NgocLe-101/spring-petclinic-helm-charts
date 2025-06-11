@@ -2,7 +2,7 @@ namespace: dev
 services:
   config-server:
     deployment:
-      serviceName: config-server
+      serviceName: spring-petclinic-config-server
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-config-server
@@ -14,7 +14,7 @@ services:
 
   admin-server:
     deployment:
-      serviceName: admin-server
+      serviceName: spring-petclinic-admin-server
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-admin-server
@@ -22,11 +22,12 @@ services:
     service:
       name: admin-server
       servicePort: 9090
-      type: ClusterIP
+      type: NodePort
+      nodePort: 30090
 
   api-gateway:
     deployment:
-      serviceName: api-gateway
+      serviceName: spring-petclinic-api-gateway
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-api-gateway
@@ -38,7 +39,7 @@ services:
 
   discovery-server:
     deployment:
-      serviceName: discovery-server
+      serviceName: spring-petclinic-discovery-server
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-discovery-server
@@ -50,7 +51,7 @@ services:
 
   customers-service:
     deployment:
-      serviceName: customers-service
+      serviceName: spring-petclinic-customers-service
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-customers-service
@@ -62,7 +63,7 @@ services:
 
   vets-service:
     deployment:
-      serviceName: vets-service
+      serviceName: spring-petclinic-vets-service
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-vets-service
@@ -74,7 +75,7 @@ services:
 
   visits-service:
     deployment:
-      serviceName: visits-service
+      serviceName: spring-petclinic-visits-service
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-visits-service
