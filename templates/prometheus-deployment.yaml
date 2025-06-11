@@ -21,8 +21,3 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
             - containerPort: {{ .Values.prometheus.service.port | default 9090 }}
-        volumeMounts:
-        - name: prometheus-config-volume
-          mountPath: /etc/prometheus
-      volumes:
-        - name: prometheus-config-volume
