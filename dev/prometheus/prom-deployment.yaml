@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: prometheus-server
+spec:
+  selector:
+    matchLabels:
+      app: prometheus-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: prometheus-server
+    spec:
+      containers:
+      - name: prometheus-server
+        image: "{{ .Values.prometheus.image.repository }}:{{ .Values.prometheus.image.tag | default "latest" }}"
+        imagePullPolicy: IfNotPresent
+        ports:
+            - containerPort: {{ .Values.prometheus.service.port | default 9090 }}
+        volumeMounts:
+        - name: prometheus-config-volume
+          mountPath: /etc/prometheus
+      volumes:
+        - name: prometheus-config-volume
+          configMap:
+            name: prometheus-config

@@ -29,3 +29,11 @@ adminServer:
   version: "1.0.0"
 genaiService:
   version: "1.0.0"
+
+prometheus:
+  image:
+    repository: "prom/prometheus"
+    tag: "latest"
+  service:
+    type: "NodePort"
+    port: 9090
