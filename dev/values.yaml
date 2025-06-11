@@ -7,11 +7,11 @@ services:
     image:
       repository: ngocle101
       tag: latest
-      imagePullPolicy: IfNotPresent
     service:
       name: config-server
       servicePort: 8888
       type: ClusterIP
+
   admin-server:
     deployment:
       serviceName: spring-petclinic-admin-server
@@ -19,11 +19,11 @@ services:
     image:
       repository: ngocle101
       tag: latest
-      imagePullPolicy: IfNotPresent
     service:
       name: admin-server
-      servicePort: 8080
+      servicePort: 9090
       type: ClusterIP
+
   api-gateway:
     deployment:
       serviceName: spring-petclinic-api-gateway
@@ -31,11 +31,11 @@ services:
     image:
       repository: ngocle101
       tag: latest
-      imagePullPolicy: IfNotPresent
     service:
       name: api-gateway
       servicePort: 8080
       type: ClusterIP
+
   discovery-server:
     deployment:
       serviceName: spring-petclinic-discovery-server
@@ -43,11 +43,11 @@ services:
     image:
       repository: ngocle101
       tag: latest
-      imagePullPolicy: IfNotPresent
     service:
       name: discovery-server
       servicePort: 8761
       type: ClusterIP
+
   customers-service:
     deployment:
       serviceName: spring-petclinic-customers-service
@@ -55,11 +55,11 @@ services:
     image:
       repository: ngocle101
       tag: 4d4e7e4
-      imagePullPolicy: IfNotPresent
     service:
       name: customers-service
-      servicePort: 8080
+      servicePort: 8081
       type: ClusterIP
+
   vets-service:
     deployment:
       serviceName: spring-petclinic-vets-service
@@ -67,11 +67,11 @@ services:
     image:
       repository: ngocle101
       tag: latest
-      imagePullPolicy: IfNotPresent
     service:
       name: vets-service
-      servicePort: 8080
+      servicePort: 8083
       type: ClusterIP
+
   visits-service:
     deployment:
       serviceName: spring-petclinic-visits-service
@@ -79,8 +79,7 @@ services:
     image:
       repository: ngocle101
       tag: latest
-      imagePullPolicy: IfNotPresent
     service:
       name: visits-service
-      servicePort: 8080
+      servicePort: 8082
       type: ClusterIP
