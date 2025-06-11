@@ -11,7 +11,6 @@ services:
       name: config-server
       servicePort: 8888
       type: ClusterIP
-
   admin-server:
     deployment:
       serviceName: spring-petclinic-admin-server
@@ -24,7 +23,6 @@ services:
       servicePort: 9090
       type: NodePort
       nodePort: 30090
-
   api-gateway:
     deployment:
       serviceName: spring-petclinic-api-gateway
@@ -36,7 +34,6 @@ services:
       name: api-gateway
       servicePort: 8080
       type: ClusterIP
-
   discovery-server:
     deployment:
       serviceName: spring-petclinic-discovery-server
@@ -48,43 +45,39 @@ services:
       name: discovery-server
       servicePort: 8761
       type: ClusterIP
-
   customers-service:
     deployment:
       serviceName: spring-petclinic-customers-service
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-customers-service
-      tag: 4d4e7e4
+      tag: b2bb5c0
     service:
       name: customers-service
       servicePort: 8081
       type: ClusterIP
-
   vets-service:
     deployment:
       serviceName: spring-petclinic-vets-service
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-vets-service
-      tag: latest
+      tag: b2bb5c0
     service:
       name: vets-service
       servicePort: 8083
       type: ClusterIP
-
   visits-service:
     deployment:
       serviceName: spring-petclinic-visits-service
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-visits-service
-      tag: latest
+      tag: b2bb5c0
     service:
       name: visits-service
       servicePort: 8082
       type: ClusterIP
-
   tracing-server:
     deployment:
       serviceName: tracing-server
