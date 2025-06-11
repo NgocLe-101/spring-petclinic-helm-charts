@@ -88,4 +88,5 @@ services:
     service:
       name: tracing-server
       servicePort: 9411
-      type: ClusterIP
+      type: NodePort
+      nodePort: 30091
