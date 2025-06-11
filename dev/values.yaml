@@ -51,7 +51,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-customers-service
-      tag: b2bb5c0
+      tag: d2280a6
     service:
       name: customers-service
       servicePort: 8081
@@ -62,7 +62,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-vets-service
-      tag: b2bb5c0
+      tag: d2280a6
     service:
       name: vets-service
       servicePort: 8083
@@ -73,7 +73,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-visits-service
-      tag: b2bb5c0
+      tag: d2280a6
     service:
       name: visits-service
       servicePort: 8082
