@@ -17,7 +17,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-discovery-server
-      tag: 95acbc3
+      tag: 1f85d94
     service:
       name: discovery-server
       servicePort: 8761
@@ -28,7 +28,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-api-gateway
-      tag: 95acbc3
+      tag: 1f85d94
     service:
       name: api-gateway
       servicePort: 8080
@@ -39,7 +39,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-customers-service
-      tag: 95acbc3
+      tag: 1f85d94
     service:
       name: customers-service
       servicePort: 8081
@@ -50,7 +50,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-vets-service
-      tag: 95acbc3
+      tag: 1f85d94
     service:
       name: vets-service
       servicePort: 8083
@@ -61,7 +61,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-visits-service
-      tag: 95acbc3
+      tag: 1f85d94
     service:
       name: visits-service
       servicePort: 8082
