@@ -11,17 +11,17 @@ services:
       name: config-server
       servicePort: 8888
       type: ClusterIP
-  admin-server:
-    deployment:
-      serviceName: spring-petclinic-admin-server
-      replicas: 1
-    image:
-      repository: ngocle101/spring-petclinic-admin-server
-      tag: latest
-    service:
-      name: admin-server
-      servicePort: 9090
-      type: ClusterIP
+  # admin-server:
+  #   deployment:
+  #     serviceName: spring-petclinic-admin-server
+  #     replicas: 1
+  #   image:
+  #     repository: ngocle101/spring-petclinic-admin-server
+  #     tag: latest
+  #   service:
+  #     name: admin-server
+  #     servicePort: 9090
+  #     type: ClusterIP
   api-gateway:
     deployment:
       serviceName: spring-petclinic-api-gateway
