@@ -94,7 +94,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/grafana
-      tag: latest
+      tag: v1.1
     service:
       name: grafana-server
       servicePort: 3000
