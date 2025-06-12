@@ -21,7 +21,7 @@ services:
     service:
       name: admin-server
       servicePort: 9090
-      type: LoadBalancer
+      type: ClusterIP
   api-gateway:
     deployment:
       serviceName: spring-petclinic-api-gateway
@@ -32,7 +32,7 @@ services:
     service:
       name: api-gateway
       servicePort: 8080
-      type: ClusterIP
+      type: LoadBalancer
   discovery-server:
     deployment:
       serviceName: spring-petclinic-discovery-server
