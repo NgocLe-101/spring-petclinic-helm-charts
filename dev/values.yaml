@@ -88,3 +88,14 @@ services:
       name: tracing-server
       servicePort: 9411
       type: LoadBalancer
+  grafana-server:
+    deployment:
+      serviceName: grafana-server
+      replicas: 1
+    image:
+      repository: ngocle101/grafana
+      tag: latest
+    service:
+      name: grafana-server
+      servicePort: 3000
+      type: LoadBalancer
