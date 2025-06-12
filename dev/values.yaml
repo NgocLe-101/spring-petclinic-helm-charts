@@ -11,24 +11,13 @@ services:
       name: config-server
       servicePort: 8888
       type: ClusterIP
-  # admin-server:
-  #   deployment:
-  #     serviceName: spring-petclinic-admin-server
-  #     replicas: 1
-  #   image:
-  #     repository: ngocle101/spring-petclinic-admin-server
-  #     tag: latest
-  #   service:
-  #     name: admin-server
-  #     servicePort: 9090
-  #     type: ClusterIP
   api-gateway:
     deployment:
       serviceName: spring-petclinic-api-gateway
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-api-gateway
-      tag: latest
+      tag: 95acbc3
     service:
       name: api-gateway
       servicePort: 8080
@@ -39,7 +28,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-discovery-server
-      tag: latest
+      tag: 95acbc3
     service:
       name: discovery-server
       servicePort: 8761
@@ -50,7 +39,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-customers-service
-      tag: d2280a6
+      tag: 95acbc3
     service:
       name: customers-service
       servicePort: 8081
@@ -61,7 +50,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-vets-service
-      tag: d2280a6
+      tag: 95acbc3
     service:
       name: vets-service
       servicePort: 8083
@@ -72,7 +61,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-visits-service
-      tag: d2280a6
+      tag: 95acbc3
     service:
       name: visits-service
       servicePort: 8082
@@ -99,3 +88,9 @@ services:
       name: grafana-server
       servicePort: 3000
       type: LoadBalancer
+  admin-server:
+    image:
+      tag: 95acbc3
+  genai-service:
+    image:
+      tag: 95acbc3
