@@ -14,7 +14,4 @@ spec:
     protocol: TCP
     port: {{ $svc.service.servicePort }}
     targetPort: {{ $svc.service.servicePort }}
-    {{- if eq $svc.service.type "NodePort" }}
-    nodePort: {{ $svc.service.nodePort | default 30000 }}
-    {{- end }}
 {{- end }}

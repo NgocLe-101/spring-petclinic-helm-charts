@@ -35,6 +35,5 @@ prometheus:
     repository: "ngocle101/prometheus"
     tag: "latest"
   service:
-    type: "NodePort"
+    type: "LoadBalancer"
     port: 9090
-    nodePort: 30092

@@ -21,8 +21,7 @@ services:
     service:
       name: admin-server
       servicePort: 9090
-      type: NodePort
-      nodePort: 30090
+      type: LoadBalancer
   api-gateway:
     deployment:
       serviceName: spring-petclinic-api-gateway
@@ -88,5 +87,4 @@ services:
     service:
       name: tracing-server
       servicePort: 9411
-      type: NodePort
-      nodePort: 30091
+      type: LoadBalancer

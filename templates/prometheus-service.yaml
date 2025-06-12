@@ -11,7 +11,4 @@ spec:
   - protocol: TCP
     port: {{ .Values.prometheus.service.port | default 9090 }}
     targetPort: {{ .Values.prometheus.service.port | default 9090 }}
-    {{- if eq .Values.prometheus.service.type "NodePort" }}
-    nodePort: {{ .Values.prometheus.service.nodePort | default 30090 }}
-    {{- end }}
   type: {{ .Values.prometheus.service.type | default "ClusterIP" }}
