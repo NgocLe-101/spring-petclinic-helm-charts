@@ -28,7 +28,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-api-gateway
-      tag: b9be790
+      tag: fa11ae9
     service:
       name: api-gateway
       servicePort: 8080
