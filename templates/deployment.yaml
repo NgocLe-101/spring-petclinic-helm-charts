@@ -23,16 +23,11 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: {{ $svc.service.servicePort }}
-        {{- if $svc.resources }}
         resources:
-          {{- toYaml $svc.resources | nindent 10 }}
-        {{- end }}
-        {{- if $svc.livenessProbe }}
-        livenessProbe:
-          {{- toYaml $svc.livenessProbe | nindent 10 }}
-        {{- end }}
-        {{- if $svc.readinessProbe }}
-        readinessProbe:
-          {{- toYaml $svc.readinessProbe | nindent 10 }}
-        {{- end }}
+          limits:
+            cpu: {{ $svc.resources.limits.cpu | default "500m" }}
+            memory: {{ $svc.resources.limits.memory | default "768Mi" }}
+          requests:
+            cpu: {{ $svc.resources.requests.cpu | default "200m" }}
+            memory: {{ $svc.resources.requests.memory | default "512Mi" }}
 {{- end }}
