@@ -6,7 +6,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-config-server
-      tag: latest
+      tag: 93313d9
     service:
       name: config-server
       servicePort: 8888
@@ -42,7 +42,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-api-gateway
-      tag: d71a6ff
+      tag: 93313d9
     service:
       name: api-gateway
       servicePort: 8080
