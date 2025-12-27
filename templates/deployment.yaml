@@ -22,5 +22,17 @@ spec:
         image: "{{ $svc.image.repository }}:{{ $svc.image.tag }}"
         imagePullPolicy: IfNotPresent
         ports:
-            - containerPort: {{ $svc.service.servicePort }}
+          - containerPort: {{ $svc.service.servicePort }}
+        {{- if $svc.resources }}
+        resources:
+          {{- toYaml $svc.resources | nindent 10 }}
+        {{- end }}
+        {{- if $svc.livenessProbe }}
+        livenessProbe:
+          {{- toYaml $svc.livenessProbe | nindent 10 }}
+        {{- end }}
+        {{- if $svc.readinessProbe }}
+        readinessProbe:
+          {{- toYaml $svc.readinessProbe | nindent 10 }}
+        {{- end }}
 {{- end }}

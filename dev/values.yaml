@@ -11,6 +11,13 @@ services:
       name: config-server
       servicePort: 8888
       type: ClusterIP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 768Mi
+      requests:
+        cpu: 200m
+        memory: 512Mi
   discovery-server:
     deployment:
       serviceName: spring-petclinic-discovery-server
@@ -22,6 +29,13 @@ services:
       name: discovery-server
       servicePort: 8761
       type: ClusterIP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 768Mi
+      requests:
+        cpu: 200m
+        memory: 512Mi
   api-gateway:
     deployment:
       serviceName: spring-petclinic-api-gateway
@@ -33,6 +47,13 @@ services:
       name: api-gateway
       servicePort: 8080
       type: LoadBalancer
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 150m
+        memory: 256Mi
   customers-service:
     deployment:
       serviceName: spring-petclinic-customers-service
@@ -44,6 +65,13 @@ services:
       name: customers-service
       servicePort: 8081
       type: ClusterIP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 768Mi
+      requests:
+        cpu: 200m
+        memory: 512Mi
   vets-service:
     deployment:
       serviceName: spring-petclinic-vets-service
@@ -55,6 +83,13 @@ services:
       name: vets-service
       servicePort: 8083
       type: ClusterIP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 768Mi
+      requests:
+        cpu: 200m
+        memory: 512Mi
   visits-service:
     deployment:
       serviceName: spring-petclinic-visits-service
@@ -66,6 +101,13 @@ services:
       name: visits-service
       servicePort: 8082
       type: ClusterIP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 768Mi
+      requests:
+        cpu: 200m
+        memory: 512Mi
   tracing-server:
     deployment:
       serviceName: tracing-server
@@ -77,6 +119,13 @@ services:
       name: tracing-server
       servicePort: 9411
       type: LoadBalancer
+    resources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
   grafana-server:
     deployment:
       serviceName: grafana-server
@@ -88,3 +137,10 @@ services:
       name: grafana-server
       servicePort: 3000
       type: LoadBalancer
+    resources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
