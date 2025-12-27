@@ -6,7 +6,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-config-server
-      tag: 93313d9
+      tag: f4dd043
     service:
       name: config-server
       servicePort: 8888
