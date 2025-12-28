@@ -35,8 +35,6 @@ spec:
   - match:
     - uri:
         prefix: "/prometheus"
-    rewrite:
-      uri: "/"  # Remove /prometheus prefix when forwarding
     route:
     - destination:
         host: prometheus-service
