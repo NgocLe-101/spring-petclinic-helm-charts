@@ -11,30 +11,7 @@ spec:
   gateways:
   - petclinic-gateway  # Reference the Gateway resource
   http:
-  # Route for API Gateway (main application)
-  - match:
-    - uri:
-        prefix: "/"
-    route:
-    - destination:
-        host: api-gateway
-        port:
-          number: 8080
-      weight: 100
-
----
-# VirtualService for Grafana
-apiVersion: networking.istio.io/v1
-kind: VirtualService
-metadata:
-  name: grafana-ingress
-  namespace: {{ .Values.namespace }}
-spec:
-  hosts:
-  - "*"
-  gateways:
-  - petclinic-gateway
-  http:
+  # Route for Grafana (must come before / catch-all)
   - match:
     - uri:
         prefix: "/grafana"
@@ -45,20 +22,7 @@ spec:
         host: grafana-server
         port:
           number: 3000
-
----
-# VirtualService for Zipkin Tracing
-apiVersion: networking.istio.io/v1
-kind: VirtualService
-metadata:
-  name: tracing-ingress
-  namespace: {{ .Values.namespace }}
-spec:
-  hosts:
-  - "*"
-  gateways:
-  - petclinic-gateway
-  http:
+  # Route for Zipkin Tracing
   - match:
     - uri:
         prefix: "/zipkin"
@@ -67,20 +31,7 @@ spec:
         host: tracing-server
         port:
           number: 9411
-
----
-# VirtualService for Prometheus
-apiVersion: networking.istio.io/v1
-kind: VirtualService
-metadata:
-  name: prometheus-ingress
-  namespace: {{ .Values.namespace }}
-spec:
-  hosts:
-  - "*"
-  gateways:
-  - petclinic-gateway
-  http:
+  # Route for Prometheus
   - match:
     - uri:
         prefix: "/prometheus"
@@ -91,4 +42,13 @@ spec:
         host: prometheus-service
         port:
           number: 9090
+  # Route for API Gateway (main application) - must be last as it's a catch-all
+  - match:
+    - uri:
+        prefix: "/"
+    route:
+    - destination:
+        host: api-gateway
+        port:
+          number: 8080
 {{- end }}
