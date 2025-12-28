@@ -1,6 +1,6 @@
 
 {{- range $name, $svc := .Values.services }}
-{{- if $svc.retries.enable | default false }}
+{{- if and $svc.retries $svc.retries.enable }}
 ---
 apiVersion: networking.istio.io/v1
 kind: VirtualService
@@ -14,9 +14,9 @@ spec:
     - route:
       - destination:
           host: {{ $svc.service.name }}
-        retries:
-          attempts: {{ $svc.retries.attempts | default 3 }}
-          perTryTimeout: {{ $svc.retries.perTryTimeout | default "2s" }}
-          retryOn: 5xx,connect-failure,refused-stream
+      retries:
+        attempts: {{ $svc.retries.attempts | default 3 }}
+        perTryTimeout: {{ $svc.retries.perTryTimeout | default "2s" }}
+        retryOn: 5xx,connect-failure,refused-stream
 {{- end }}
 {{- end }}
