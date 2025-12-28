@@ -1,0 +1,19 @@
+auth:
+  strategy: anonymous   # dev only
+
+deployment:
+  accessible_namespaces:
+    - "**"
+
+external_services:
+  prometheus:
+    url: http://prometheus-service.dev.svc:9090
+
+  istio:
+    root_namespace: istio-system
+
+  tracing:
+    enabled: false
+
+server:
+  web_scheme: http
