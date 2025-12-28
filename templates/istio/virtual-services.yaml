@@ -1,6 +1,6 @@
 
 {{- range $name, $svc := .Values.services }}
-{{- if $svc.retries.enable || false }}
+{{- if $svc.retries.enable | default false }}
 ---
 apiVersion: networking.istio.io/v1
 kind: VirtualService
