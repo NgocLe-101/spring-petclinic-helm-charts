@@ -17,6 +17,7 @@ spec:
       labels:
         app: {{ $svc.deployment.serviceName }}
     spec:
+      serviceAccountName: {{ $svc.deployment.serviceName }}
       containers:
       - name: {{ $svc.deployment.serviceName }}
         image: "{{ $svc.image.repository }}:{{ $svc.image.tag }}"

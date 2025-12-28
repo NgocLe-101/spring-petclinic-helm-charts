@@ -1,4 +1,12 @@
 namespace: dev
+
+# Istio configuration
+istio:
+  authorization:
+    enabled: true
+mtls:
+  mode: STRICT
+
 services:
   config-server:
     deployment:
@@ -18,6 +26,14 @@ services:
       requests:
         cpu: 200m
         memory: 512Mi
+    authorization:
+      allowFrom:
+        - spring-petclinic-discovery-server
+        - spring-petclinic-api-gateway
+        - spring-petclinic-customers-service
+        - spring-petclinic-vets-service
+        - spring-petclinic-visits-service
+      methods: ["GET", "POST"]
   discovery-server:
     deployment:
       serviceName: spring-petclinic-discovery-server
@@ -36,6 +52,13 @@ services:
       requests:
         cpu: 200m
         memory: 512Mi
+    authorization:
+      allowFrom:
+        - spring-petclinic-api-gateway
+        - spring-petclinic-customers-service
+        - spring-petclinic-vets-service
+        - spring-petclinic-visits-service
+      methods: ["GET", "POST", "PUT", "DELETE"]
   api-gateway:
     deployment:
       serviceName: spring-petclinic-api-gateway
@@ -54,6 +77,8 @@ services:
       requests:
         cpu: 150m
         memory: 256Mi
+    # API Gateway is externally accessible, so we allow ingress gateway traffic
+    # No internal service-to-service authorization needed as it's the entry point
   customers-service:
     deployment:
       serviceName: spring-petclinic-customers-service
@@ -72,6 +97,10 @@ services:
       requests:
         cpu: 200m
         memory: 512Mi
+    authorization:
+      allowFrom:
+        - spring-petclinic-api-gateway
+      methods: ["GET", "POST", "PUT", "DELETE"]
   vets-service:
     deployment:
       serviceName: spring-petclinic-vets-service
@@ -90,6 +119,10 @@ services:
       requests:
         cpu: 200m
         memory: 512Mi
+    authorization:
+      allowFrom:
+        - spring-petclinic-api-gateway
+      methods: ["GET", "POST", "PUT", "DELETE"]
   visits-service:
     deployment:
       serviceName: spring-petclinic-visits-service
@@ -108,6 +141,10 @@ services:
       requests:
         cpu: 200m
         memory: 512Mi
+    authorization:
+      allowFrom:
+        - spring-petclinic-api-gateway
+      methods: ["GET", "POST", "PUT", "DELETE"]
   tracing-server:
     deployment:
       serviceName: tracing-server
@@ -126,6 +163,13 @@ services:
       requests:
         cpu: 100m
         memory: 128Mi
+    authorization:
+      allowFrom:
+        - spring-petclinic-api-gateway
+        - spring-petclinic-customers-service
+        - spring-petclinic-vets-service
+        - spring-petclinic-visits-service
+      methods: ["GET", "POST"]
   grafana-server:
     deployment:
       serviceName: grafana-server
@@ -144,3 +188,4 @@ services:
       requests:
         cpu: 100m
         memory: 128Mi
+    # Grafana is externally accessible via LoadBalancer, no internal authorization needed

@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/security.istio.io/peerauthentication_v1.json
+
+# Default deny-all policy - blocks all traffic unless explicitly allowed
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-all
+  namespace: {{ .Values.namespace }}
+spec:
+  {}
+
+---
+# Service-to-service authorization policies
+{{- if .Values.istio.authorization.enabled }}
+{{- range $name, $svc := .Values.services }}
+{{- if $svc.authorization }}
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: {{ $name }}-authz
+  namespace: {{ $.Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ $svc.deployment.serviceName }}
+  action: ALLOW
+  rules:
+  {{- range $svc.authorization.allowFrom }}
+  - from:
+    - source:
+        principals:
+        - "cluster.local/ns/{{ $.Values.namespace }}/sa/{{ . }}"
+    {{- if $svc.authorization.methods }}
+    to:
+    - operation:
+        methods: {{ $svc.authorization.methods | toJson }}
+    {{- end }}
+    {{- if $svc.authorization.paths }}
+        paths: {{ $svc.authorization.paths | toJson }}
+    {{- end }}
+  {{- end }}
+---
+{{- end }}
+{{- end }}
+{{- end }}
