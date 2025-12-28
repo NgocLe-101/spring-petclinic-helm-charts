@@ -1,0 +1,70 @@
+{{- if .Values.istio.ingress.enabled }}
+# VirtualService to route traffic from Gateway to internal services
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: petclinic-ingress
+  namespace: {{ .Values.namespace }}
+spec:
+  hosts:
+  - "*"  # Accept any host (works with IP addresses)
+  gateways:
+  - petclinic-gateway  # Reference the Gateway resource
+  http:
+  # Route for API Gateway (main application)
+  - match:
+    - uri:
+        prefix: "/"
+    route:
+    - destination:
+        host: api-gateway
+        port:
+          number: 8080
+      weight: 100
+
+---
+# VirtualService for Grafana
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: grafana-ingress
+  namespace: {{ .Values.namespace }}
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - petclinic-gateway
+  http:
+  - match:
+    - uri:
+        prefix: "/grafana"
+    rewrite:
+      uri: "/"  # Remove /grafana prefix when forwarding
+    route:
+    - destination:
+        host: grafana-server
+        port:
+          number: 3000
+
+---
+# VirtualService for Zipkin Tracing
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: tracing-ingress
+  namespace: {{ .Values.namespace }}
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - petclinic-gateway
+  http:
+  - match:
+    - uri:
+        prefix: "/zipkin"
+    route:
+    - destination:
+        host: tracing-server
+        port:
+          number: 9411
+{{- end }}

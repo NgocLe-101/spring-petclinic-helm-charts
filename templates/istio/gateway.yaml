@@ -1,0 +1,30 @@
+{{- if .Values.istio.ingress.enabled }}
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: petclinic-gateway
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    istio: ingressgateway  # Use Istio's default ingress gateway pod
+  servers:
+  # HTTP server - for now until you get a domain and certificate
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"  # Accept any host (works with IP addresses)
+  {{- if .Values.istio.ingress.tls.enabled }}
+  # HTTPS server - can be enabled later when you have a certificate
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - "*"
+    tls:
+      mode: SIMPLE
+      credentialName: {{ .Values.istio.ingress.tls.secretName }}
+  {{- end }}
+{{- end }}

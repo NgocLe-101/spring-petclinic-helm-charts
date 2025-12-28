@@ -2,6 +2,11 @@ namespace: dev
 
 # Istio configuration
 istio:
+  ingress:
+    enabled: true
+    tls:
+      enabled: false  # Set to true when you get a domain and certificate
+      secretName: "petclinic-tls-secret"
   authorization:
     enabled: true
 mtls:
@@ -69,7 +74,7 @@ services:
     service:
       name: api-gateway
       servicePort: 8080
-      type: LoadBalancer
+      type: ClusterIP  # Changed from LoadBalancer - now accessed via Istio Ingress Gateway
     resources:
       limits:
         cpu: 300m
@@ -155,7 +160,7 @@ services:
     service:
       name: tracing-server
       servicePort: 9411
-      type: LoadBalancer
+      type: ClusterIP  # Changed from LoadBalancer - now accessed via Istio Ingress Gateway at /zipkin
     resources:
       limits:
         cpu: 200m
@@ -180,7 +185,7 @@ services:
     service:
       name: grafana-server
       servicePort: 3000
-      type: LoadBalancer
+      type: ClusterIP  # Changed from LoadBalancer - now accessed via Istio Ingress Gateway at /grafana
     resources:
       limits:
         cpu: 200m
