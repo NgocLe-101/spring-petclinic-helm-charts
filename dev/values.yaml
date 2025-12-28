@@ -205,3 +205,35 @@ services:
         - serviceAccount: istio-ingressgateway
           namespace: istio-system
       methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+  prometheus-server:
+    deployment:
+      serviceName: prometheus-server
+      replicas: 1
+    image:
+      repository: ngocle101/prometheus
+      tag: v1.0.8
+    service:
+      name: prometheus-service
+      servicePort: 9090
+      type: ClusterIP  # Changed from LoadBalancer - now accessed via Istio Ingress Gateway at /prometheus
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 200m
+        memory: 256Mi
+    # Allow access from Istio Ingress Gateway, Kiali, and all microservices (for metrics scraping)
+    authorization:
+      allowFrom:
+        - serviceAccount: istio-ingressgateway
+          namespace: istio-system
+        - serviceAccount: kiali
+          namespace: istio-system
+        - serviceAccount: spring-petclinic-api-gateway
+        - serviceAccount: spring-petclinic-customers-service
+        - serviceAccount: spring-petclinic-vets-service
+        - serviceAccount: spring-petclinic-visits-service
+        - serviceAccount: spring-petclinic-config-server
+        - serviceAccount: spring-petclinic-discovery-server
+      methods: ["GET", "POST"]

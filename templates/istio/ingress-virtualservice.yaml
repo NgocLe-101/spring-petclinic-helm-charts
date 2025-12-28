@@ -67,4 +67,26 @@ spec:
         host: tracing-server
         port:
           number: 9411
+
+---
+# VirtualService for Prometheus
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: prometheus-ingress
+  namespace: {{ .Values.namespace }}
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - petclinic-gateway
+  http:
+  - match:
+    - uri:
+        prefix: "/prometheus"
+    route:
+    - destination:
+        host: prometheus-service
+        port:
+          number: 9090
 {{- end }}
