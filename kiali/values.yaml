@@ -9,7 +9,7 @@ deployment:
 
 external_services:
   prometheus:
-    url: "http://prometheus-service.dev.svc:9090"
+    url: "http://prometheus-service.dev.svc:9090/prometheus"
 
   istio:
     root_namespace: istio-system
