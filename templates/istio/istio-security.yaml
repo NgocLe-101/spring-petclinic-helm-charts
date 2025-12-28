@@ -28,8 +28,17 @@ spec:
   {{- range $svc.authorization.allowFrom }}
   - from:
     - source:
+        {{- if .namespace }}
+        namespaces: [{{ .namespace | quote }}]
+        {{- else }}
+        namespaces: [{{ $.Values.namespace | quote }}]
+        {{- end }}
         principals:
-        - "cluster.local/ns/{{ $.Values.namespace }}/sa/{{ . }}"
+        {{- if .namespace }}
+        - "cluster.local/ns/{{ .namespace }}/sa/{{ .serviceAccount }}"
+        {{- else }}
+        - "cluster.local/ns/{{ $.Values.namespace }}/sa/{{ .serviceAccount }}"
+        {{- end }}
     {{- if $svc.authorization.methods }}
     to:
     - operation:

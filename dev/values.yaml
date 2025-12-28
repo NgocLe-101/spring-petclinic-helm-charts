@@ -33,11 +33,11 @@ services:
         memory: 512Mi
     authorization:
       allowFrom:
-        - spring-petclinic-discovery-server
-        - spring-petclinic-api-gateway
-        - spring-petclinic-customers-service
-        - spring-petclinic-vets-service
-        - spring-petclinic-visits-service
+        - serviceAccount: spring-petclinic-discovery-server
+        - serviceAccount: spring-petclinic-api-gateway
+        - serviceAccount: spring-petclinic-customers-service
+        - serviceAccount: spring-petclinic-vets-service
+        - serviceAccount: spring-petclinic-visits-service
       methods: ["GET", "POST"]
   discovery-server:
     deployment:
@@ -59,10 +59,10 @@ services:
         memory: 512Mi
     authorization:
       allowFrom:
-        - spring-petclinic-api-gateway
-        - spring-petclinic-customers-service
-        - spring-petclinic-vets-service
-        - spring-petclinic-visits-service
+        - serviceAccount: spring-petclinic-api-gateway
+        - serviceAccount: spring-petclinic-customers-service
+        - serviceAccount: spring-petclinic-vets-service
+        - serviceAccount: spring-petclinic-visits-service
       methods: ["GET", "POST", "PUT", "DELETE"]
   api-gateway:
     deployment:
@@ -82,8 +82,12 @@ services:
       requests:
         cpu: 150m
         memory: 256Mi
-    # API Gateway is externally accessible, so we allow ingress gateway traffic
-    # No internal service-to-service authorization needed as it's the entry point
+    # Allow Istio Ingress Gateway to access api-gateway
+    authorization:
+      allowFrom:
+        - serviceAccount: istio-ingressgateway
+          namespace: istio-system
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
   customers-service:
     deployment:
       serviceName: spring-petclinic-customers-service
@@ -104,7 +108,7 @@ services:
         memory: 512Mi
     authorization:
       allowFrom:
-        - spring-petclinic-api-gateway
+        - serviceAccount: spring-petclinic-api-gateway
       methods: ["GET", "POST", "PUT", "DELETE"]
   vets-service:
     deployment:
@@ -126,7 +130,7 @@ services:
         memory: 512Mi
     authorization:
       allowFrom:
-        - spring-petclinic-api-gateway
+        - serviceAccount: spring-petclinic-api-gateway
       methods: ["GET", "POST", "PUT", "DELETE"]
   visits-service:
     deployment:
@@ -148,7 +152,7 @@ services:
         memory: 512Mi
     authorization:
       allowFrom:
-        - spring-petclinic-api-gateway
+        - serviceAccount: spring-petclinic-api-gateway
       methods: ["GET", "POST", "PUT", "DELETE"]
   tracing-server:
     deployment:
@@ -170,10 +174,12 @@ services:
         memory: 128Mi
     authorization:
       allowFrom:
-        - spring-petclinic-api-gateway
-        - spring-petclinic-customers-service
-        - spring-petclinic-vets-service
-        - spring-petclinic-visits-service
+        - serviceAccount: istio-ingressgateway
+          namespace: istio-system
+        - serviceAccount: spring-petclinic-api-gateway
+        - serviceAccount: spring-petclinic-customers-service
+        - serviceAccount: spring-petclinic-vets-service
+        - serviceAccount: spring-petclinic-visits-service
       methods: ["GET", "POST"]
   grafana-server:
     deployment:
@@ -193,4 +199,9 @@ services:
       requests:
         cpu: 100m
         memory: 128Mi
-    # Grafana is externally accessible via LoadBalancer, no internal authorization needed
+    # Allow access from Istio Ingress Gateway
+    authorization:
+      allowFrom:
+        - serviceAccount: istio-ingressgateway
+          namespace: istio-system
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
