@@ -8,8 +8,8 @@ deployment:
     sidecar.istio.io/inject: "true"
 
 external_services:
-  prometheus:
-    url: "http://prometheus-service.dev.svc:9090/prometheus"
+  # prometheus:
+  #   url: "http://prometheus-service.dev.svc:9090"
 
   istio:
     root_namespace: istio-system
