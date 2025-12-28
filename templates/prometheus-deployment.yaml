@@ -15,6 +15,7 @@ spec:
       labels:
         app: prometheus-server
     spec:
+      serviceAccountName: prometheus-service-account
       containers:
       - name: prometheus-server
         image: "{{ .Values.prometheus.image.repository }}:{{ .Values.prometheus.image.tag | default "latest" }}"
