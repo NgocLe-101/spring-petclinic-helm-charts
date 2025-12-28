@@ -6,3 +6,18 @@ metadata:
 spec:
   mtls:
     mode: {{ .Values.mtls.mode }}
+
+---
+# Override for Prometheus - allow both plain HTTP and mTLS
+# Needed for Kiali (without sidecar) to access Prometheus
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: prometheus-permissive
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: prometheus-server
+  mtls:
+    mode: PERMISSIVE  # Accept both plain HTTP and mTLS
