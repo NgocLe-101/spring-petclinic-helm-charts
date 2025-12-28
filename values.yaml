@@ -33,7 +33,7 @@ genaiService:
 prometheus:
   image:
     repository: "ngocle101/prometheus"
-    tag: "v1.0.3" # with istio updated
+    tag: "v1.0.4" # with istio updated
   service:
     type: "LoadBalancer"
     port: 9090
