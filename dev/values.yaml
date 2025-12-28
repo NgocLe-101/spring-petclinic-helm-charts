@@ -211,7 +211,7 @@ services:
       replicas: 1
     image:
       repository: ngocle101/prometheus
-      tag: v1.0.8
+      tag: v1.0.9
     service:
       name: prometheus-service
       servicePort: 9090
