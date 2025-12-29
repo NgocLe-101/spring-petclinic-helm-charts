@@ -6,7 +6,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   selector:
-    istio: ingressgateway  # Use Istio's default ingress gateway pod
+    istio: ingress  # Use Istio's default ingress gateway pod
   servers:
   # HTTP server - for now until you get a domain and certificate
   - port:
