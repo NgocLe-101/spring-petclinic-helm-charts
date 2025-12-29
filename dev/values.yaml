@@ -85,7 +85,7 @@ services:
     # Allow Istio Ingress Gateway to access api-gateway
     authorization:
       allowFrom:
-        - serviceAccount: istio-ingressgateway
+        - serviceAccount: istio-ingress
           namespace: istio-system
         - serviceAccount: tracing-server
         - serviceAccount: prometheus-server
@@ -182,7 +182,7 @@ services:
         memory: 128Mi
     authorization:
       allowFrom:
-        - serviceAccount: istio-ingressgateway
+        - serviceAccount: istio-ingress
           namespace: istio-system
       methods: ["GET", "POST"]
   grafana-server:
@@ -206,7 +206,7 @@ services:
     # Allow access from Istio Ingress Gateway
     authorization:
       allowFrom:
-        - serviceAccount: istio-ingressgateway
+        - serviceAccount: istio-ingress
           namespace: istio-system
       methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
   prometheus-server:
@@ -230,7 +230,7 @@ services:
     # Allow access from Istio Ingress Gateway, Kiali, and all microservices (for metrics scraping)
     authorization:
       allowFrom:
-        - serviceAccount: istio-ingressgateway
+        - serviceAccount: istio-ingress
           namespace: istio-system
         - serviceAccount: kiali
           namespace: istio-system
