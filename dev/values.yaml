@@ -121,6 +121,7 @@ services:
         - serviceAccount: spring-petclinic-api-gateway
         - serviceAccount: tracing-server
         - serviceAccount: prometheus-server
+        - serviceAccount: spring-petclinic-discovery-server
       methods:
         - GET
         - POST
@@ -149,6 +150,7 @@ services:
         - serviceAccount: spring-petclinic-api-gateway
         - serviceAccount: tracing-server
         - serviceAccount: prometheus-server
+        - serviceAccount: spring-petclinic-discovery-server
       methods:
         - GET
         - POST
@@ -177,6 +179,7 @@ services:
         - serviceAccount: spring-petclinic-api-gateway
         - serviceAccount: tracing-server
         - serviceAccount: prometheus-server
+        - serviceAccount: spring-petclinic-discovery-server
       methods:
         - GET
         - POST
