@@ -116,6 +116,10 @@ services:
       requests:
         cpu: 200m
         memory: 512Mi
+    retries:
+      enable: true
+      attempts: 3
+      perTryTimeout: 2s
     authorization:
       allowFrom:
         - serviceAccount: spring-petclinic-api-gateway
