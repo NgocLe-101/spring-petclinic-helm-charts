@@ -1,17 +1,14 @@
 namespace: dev
-
-# Istio configuration
 istio:
   ingress:
     enabled: true
     tls:
-      enabled: false  # Set to true when you get a domain and certificate
-      secretName: "petclinic-tls-secret"
+      enabled: false
+      secretName: petclinic-tls-secret
   authorization:
     enabled: true
 mtls:
   mode: STRICT
-
 services:
   config-server:
     deployment:
@@ -38,7 +35,9 @@ services:
         - serviceAccount: spring-petclinic-customers-service
         - serviceAccount: spring-petclinic-vets-service
         - serviceAccount: spring-petclinic-visits-service
-      methods: ["GET", "POST"]
+      methods:
+        - GET
+        - POST
   discovery-server:
     deployment:
       serviceName: spring-petclinic-discovery-server
@@ -63,7 +62,11 @@ services:
         - serviceAccount: spring-petclinic-customers-service
         - serviceAccount: spring-petclinic-vets-service
         - serviceAccount: spring-petclinic-visits-service
-      methods: ["GET", "POST", "PUT", "DELETE"]
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
   api-gateway:
     deployment:
       serviceName: spring-petclinic-api-gateway
@@ -74,7 +77,7 @@ services:
     service:
       name: api-gateway
       servicePort: 8080
-      type: ClusterIP  # Changed from LoadBalancer - now accessed via Istio Ingress Gateway
+      type: ClusterIP
     resources:
       limits:
         cpu: 300m
@@ -82,21 +85,26 @@ services:
       requests:
         cpu: 150m
         memory: 256Mi
-    # Allow Istio Ingress Gateway to access api-gateway
     authorization:
       allowFrom:
         - serviceAccount: istio-ingress
           namespace: istio-system
         - serviceAccount: tracing-server
         - serviceAccount: prometheus-server
-      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+        - OPTIONS
   customers-service:
     deployment:
       serviceName: spring-petclinic-customers-service
       replicas: 1
     image:
       repository: ngocle101/spring-petclinic-customers-service
-      tag: 1f85d94
+      tag: 835be2b
     service:
       name: customers-service
       servicePort: 8081
@@ -113,7 +121,11 @@ services:
         - serviceAccount: spring-petclinic-api-gateway
         - serviceAccount: tracing-server
         - serviceAccount: prometheus-server
-      methods: ["GET", "POST", "PUT", "DELETE"]
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
   vets-service:
     deployment:
       serviceName: spring-petclinic-vets-service
@@ -137,7 +149,11 @@ services:
         - serviceAccount: spring-petclinic-api-gateway
         - serviceAccount: tracing-server
         - serviceAccount: prometheus-server
-      methods: ["GET", "POST", "PUT", "DELETE"]
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
   visits-service:
     deployment:
       serviceName: spring-petclinic-visits-service
@@ -161,7 +177,11 @@ services:
         - serviceAccount: spring-petclinic-api-gateway
         - serviceAccount: tracing-server
         - serviceAccount: prometheus-server
-      methods: ["GET", "POST", "PUT", "DELETE"]
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
   tracing-server:
     deployment:
       serviceName: tracing-server
@@ -172,7 +192,7 @@ services:
     service:
       name: tracing-server
       servicePort: 9411
-      type: ClusterIP  # Changed from LoadBalancer - now accessed via Istio Ingress Gateway at /zipkin
+      type: ClusterIP
     resources:
       limits:
         cpu: 200m
@@ -184,7 +204,9 @@ services:
       allowFrom:
         - serviceAccount: istio-ingress
           namespace: istio-system
-      methods: ["GET", "POST"]
+      methods:
+        - GET
+        - POST
   grafana-server:
     deployment:
       serviceName: grafana-server
@@ -195,7 +217,7 @@ services:
     service:
       name: grafana-server
       servicePort: 3000
-      type: ClusterIP  # Changed from LoadBalancer - now accessed via Istio Ingress Gateway at /grafana
+      type: ClusterIP
     resources:
       limits:
         cpu: 200m
@@ -203,12 +225,17 @@ services:
       requests:
         cpu: 100m
         memory: 128Mi
-    # Allow access from Istio Ingress Gateway
     authorization:
       allowFrom:
         - serviceAccount: istio-ingress
           namespace: istio-system
-      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+        - OPTIONS
   prometheus-server:
     deployment:
       serviceName: prometheus-server
@@ -219,7 +246,7 @@ services:
     service:
       name: prometheus-service
       servicePort: 9090
-      type: ClusterIP  # Changed from LoadBalancer - now accessed via Istio Ingress Gateway at /prometheus
+      type: ClusterIP
     resources:
       limits:
         cpu: 500m
@@ -227,11 +254,12 @@ services:
       requests:
         cpu: 200m
         memory: 256Mi
-    # Allow access from Istio Ingress Gateway, Kiali, and all microservices (for metrics scraping)
     authorization:
       allowFrom:
         - serviceAccount: istio-ingress
           namespace: istio-system
         - serviceAccount: kiali
           namespace: istio-system
-      methods: ["GET", "POST"]
+      methods:
+        - GET
+        - POST
